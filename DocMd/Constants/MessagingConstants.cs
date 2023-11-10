@@ -1,4 +1,4 @@
-﻿namespace DocMd
+﻿namespace DocMd.Constants
 {
     internal class MessagingConstants
     {

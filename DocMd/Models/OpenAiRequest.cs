@@ -1,5 +1,8 @@
-﻿internal class OpenAiRequest
+﻿namespace DocMd.Models
 {
-    public string Model { get; set; }
-    public Message[] Messages { get; set; }
+    internal class OpenAiRequest
+    {
+        public string Model { get; set; }
+        public Message[] Messages { get; set; }
+    }
 }
