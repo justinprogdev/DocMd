@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using DocMd.Models;
+using System.Text;
 using System.Text.Json;
 
 namespace DocMd
@@ -32,12 +33,6 @@ namespace DocMd
                 max_tokens = 500,
                 temperature = 0.5,
             };
-
-            // "max_tokens": 512,
-            //"top_p": 1,
-            //"temperature": 0.5,
-            //"frequency_penalty": 0,
-            //"presence_penalty": 0
 
             var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiKey);
