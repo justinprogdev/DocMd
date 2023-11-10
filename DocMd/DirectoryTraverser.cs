@@ -24,7 +24,7 @@ namespace DocMd
             // recurse into all dirs
             DirectoryInfo[] subDirectories = directoryInfo.GetDirectories();
             foreach (DirectoryInfo subdirectory in subDirectories)
-                ProcessDirectory(subdirectory);
+                sourceFileInfoCollection.AddRange(ProcessDirectory(subdirectory));
 
             return sourceFileInfoCollection;
         }
