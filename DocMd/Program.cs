@@ -1,31 +1,35 @@
 ﻿using Microsoft.VisualBasic;
+using System.Text.Json;
 
 namespace DocMd
 {
     class Program
     {
-        static void Main()
+        private static object projectName;
+
+        static async Task Main()
         {
             string variableName = "certkeywern";
             string secret = Environment.GetEnvironmentVariable(variableName);
 
             Console.WriteLine("Please provide the path to the solution, or project folder" +
-                "you wish to document");
-
+                " you wish to document");
             var filePath = Console.ReadLine();
+
+            Console.WriteLine("Please provide the name of the project");
+            var projectName = Console.ReadLine();
+
             try
             {
                 DirectoryTraverser traverser = new DirectoryTraverser();
                 var sourceFileInfo = traverser.Traverse(new DirectoryInfo(filePath));
-
-                var systemInstructions = MessagingConstants.SystemInstructions;
-
-                var apiKey = "your-api-key"; // Replace with your actual API key
                 var client = new OpenAIClient(secret);
 
-                string result = client.CallOpenAiApiAsync(systemInstructions + sourceFileInfo).Result;
-                Console.WriteLine(result);
+                string result = await client.CallOpenAiApiAsync(sourceFileInfo);
 
+                File.WriteAllText($"C:\\DocMd\\{projectName}Doc.md", result);
+
+                Console.WriteLine(result);
 
             }
             catch (Exception ex)
